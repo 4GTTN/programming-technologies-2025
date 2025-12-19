@@ -120,3 +120,7 @@ class SearchView(APIView):
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 ```
+
+## Вывод
+
+В процессе выполнения лабораторной работы удалось ознакомится с взаимодействем с векторной базой данных milvus. Так же был получен практический опыт настройки docker-контейнера на использованите мощностей видеокарты, путем конфигурации docker-compose файла.
