@@ -33,7 +33,16 @@ prompt = os.getenv("PROMT")
 
 Параметр temperature был перемещен в env файл, оптимально был выбран 0.6, для избежания ерунды в ответах:
 
-![alt text](photo/3.png)
+>temperature = os.getenv("TEMPIRATURE")
+
+```python
+def get_response(text: str, client: Mistral):
+    response = client.chat.complete(
+        model="mistral-tiny", 
+        messages=chat_history,
+        temperature = temperature
+    )
+```
 
 ## История сообщений
 
