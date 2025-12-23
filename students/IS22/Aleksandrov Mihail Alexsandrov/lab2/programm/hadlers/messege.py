@@ -31,7 +31,7 @@ async def message_handler(message: Message) -> None:
             logging.error(f"Error in message_handler: {e}")
             await message.answer("Ошибка при обработке сообщения")
     else:
-        await message.answer("Пожалуйста, отправляйте только текстовые сообщения.")
+        await message.answer("Я не могу это понять, мне нужен текст")
 
 def split_message(text: str, max_len: int = MAX_TEXT_LENGTH) -> list[str]:
     parts = []
@@ -42,4 +42,5 @@ def split_message(text: str, max_len: int = MAX_TEXT_LENGTH) -> list[str]:
         parts.append(text[:cut])
         text = text[cut:]
     parts.append(text)
+
     return parts
