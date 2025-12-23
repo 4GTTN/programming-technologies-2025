@@ -11,6 +11,9 @@ client = Mistral(api_key=api_key)
 
 chat_history = []
 
+if prompt:
+    chat_history.append({"role": "system", "content": prompt})
+
 def get_response(text: str, client: Mistral):
     response = client.chat.complete(
         model="mistral-tiny", 
