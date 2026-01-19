@@ -273,5 +273,5 @@ torch.onnx.export(model,               # модель
 В остальном, процесс обучения нейронной сети такого типа очень схож с сетями других типов.
 
 Ссылка на блокнот в Google Collab:
-https://colab.research.google.com/drive/1AmWOvYi8cci7lw3rLEUlxT3JOPVNJ3UG?usp=sharing
+https://colab.research.google.com/drive/1mxgHzoAxZTeApgNcJow-SRCRGHIdhIu9
 
