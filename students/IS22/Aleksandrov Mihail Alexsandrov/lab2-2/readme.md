@@ -20,12 +20,12 @@
 
 Затем, мы определили видеокарту для того, чтобы нейронная сеть обучалась быстрее:
 
-![Определяем GPU](https://github.com/NP1R777/programming-technologies-2025/blob/Laba_2_Belyev/students/IS22/Zaharov%20Ilia/Lab2-2/pictures/image1.png)
+![alt text](photo/1.png)
 
 ## Этап №2. Подготовка тренировочной и тестовой выборок и их чтение.
 На втором этапе мы скачали данные CIFAR100 и сформировали тренировочную и тестовую выборки. В данном варианте, мне попалась выборка с яблоками.
 
-![Картинка с выборки](https://github.com/NP1R777/programming-technologies-2025/blob/Laba_2_Belyev/students/IS22/Zaharov%20Ilia/Lab2-2/pictures/image2.png)
+![alt text](photo/2.png)
 
 Далее было принято решение создать `Pytorch DataLoader` для удобной манипуляции данными и перейти к следующему этапу.
 
@@ -47,10 +47,10 @@
 
 Вот сводка по модели:
 
-![Описание модели](https://github.com/NP1R777/programming-technologies-2025/blob/Laba_2_Belyev/students/IS22/Zaharov%20Ilia/Lab2-2/pictures/image3.png)
+![alt text](photo/3.png)
 
 Ниже представлен код написанной модели, с подробными комментариями:
-```
+```python
 class Normalize(nn.Module):
     def __init__(self, mean, std):
         super(Normalize, self).__init__()
@@ -116,10 +116,11 @@ model
 
 Графики ниже отражают итог обучения модели:
 
-![Графики обучения нейронной сети](https://github.com/NP1R777/programming-technologies-2025/blob/Laba_2_Belyev/students/IS22/Zaharov%20Ilia/Lab2-2/pictures/image4.png)
+![alt text](photo/4.png)
 
 Ниже так же представлен код для более полного понимания того, как проходило обучение и что конкретно использовалось в коде:
-```
+
+```python
 EPOCHS = 500
 REDRAW_EVERY = 20
 steps_per_epoch = len(dataloader['train'])
@@ -206,7 +207,7 @@ print('Обучение закончено за %s секунд' % passed)
 
 Затем, было принято решение проверить качество обучения модели по классам на обучающей и тестовой выборке. Ниже представлены результаты данной проверки:
 
-![Проверка обучения модели](https://github.com/NP1R777/programming-technologies-2025/blob/Laba_2_Belyev/students/IS22/Zaharov%20Ilia/Lab2-2/pictures/image5.png)
+![alt text](photo/5.png)
 
 Код для проверки обучения модели нейронной сети, написанной на предыдущих шагах:
 ```
@@ -237,48 +238,12 @@ ONNX (Open Neural Network Exchange) — это открытый стандарт
 обеспечивая интероперабельность между инструментами, аппаратными платформами и средами.
 После несложных манипуляций, модель была сохранена в данном формате:
 
-```
-RuntimeError: /github/workspace/onnx/version_converter/BaseConverter.h:68: adapter_lookup: Assertion `false` failed: No Adapter From Version $16 for Identity
-[torch.onnx] Run decomposition... ✅
-[torch.onnx] Translate the graph into ONNX...
-[torch.onnx] Translate the graph into ONNX... ✅
-ONNXProgram(
-    model=
-        <
-            ir_version=10,
-            opset_imports={'': 18},
-            producer_name='pytorch',
-            producer_version='2.9.0+cu126',
-            domain=None,
-            model_version=None,
-        >
-        graph(
-            name=main_graph,
-            inputs=(
-                %"input"<FLOAT,[s31,32,32,3]>
-            ),
-            outputs=(
-                %"output"<FLOAT,[1,3]>
-            ),
-            initializers=(
-                %"seq.1.bias"<FLOAT,[32]>{TorchTensor(...)},
-                %"seq.3.bias"<FLOAT,[64]>{TorchTensor(...)},
-                %"seq.7.weight"<FLOAT,[3,256]>{TorchTensor(...)},
-                %"seq.7.bias"<FLOAT,[3]>{TorchTensor<FLOAT,[3]>(Parameter containing: tensor([ 0.5177, -0.5444, -0.4557], device='cuda:0', requires_grad=True), name='seq.7.bias')},
-                %"seq.0.mean"<FLOAT,[3]>{TorchTensor<FLOAT,[3]>(tensor([0.5074, 0.4867, 0.4411], device='cuda:0'), name='seq.0.mean')},
-                %"seq.0.std"<FLOAT,[3]>{TorchTensor<FLOAT,[3]>(tensor([0.2011, 0.1987, 0.2025], device='cuda:0'), name='seq.0.std')},
-                %"seq.1.weight"<FLOAT,[32,3,5,5]>{TorchTensor(...)},
-                %"seq.3.weight"<FLOAT,[64,32,3,3]>{TorchTensor(...)},
-                %"val_4"<INT64,[2]>{Tensor<INT64,[2]>(array([  1, 256]), name='val_4')},
-                %"val_0"<FLOAT,[]>{Tensor<FLOAT,[]>(array(255., dtype=float32), name='val_0')}
-            ),
-        ) {
-```
+![alt text](photo/6.png)
 
 В данном фрагменте показана только часть данного формата, так как показывать его полностью не целесообразно из-за очень большого количества полей. По сути,
 данный формат сохранени моделей нейронных сетей очень схож с `JSON`, однако он немного видоизменён для того, чтобы оптимально работать с моделями нейронных сетей. Код для сохранения модели предстален ниже:
 
-```
+```python
 # входной тензор для модели
 x = torch.randn(1, 32, 32, 3, requires_grad=True).to(device)
 torch_out = model(x)
