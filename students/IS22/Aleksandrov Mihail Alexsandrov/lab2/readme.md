@@ -138,7 +138,7 @@ class MessageBase(Base):
 ```
 
 # Задание 5
-Возможность реагировать на сообщения была реализована путем проверки содержимого сообщения:
+В 5 задание нужно было добавить реагировать на картинки. Возможность реагировать на сообщения была реализована путем проверки содержимого сообщения. Если ему передается картинка ответ будет "Я не могу это понять, мне нужен текст" ниже представлен код и пример:
 ```python
 async def message_handler(message: Message) -> None:
     if message.text: 
@@ -163,8 +163,7 @@ async def message_handler(message: Message) -> None:
             logging.error(f"Error in message_handler: {e}")
             await message.answer("Ошибка при обработке сообщения")
     else:
-        await message.answer("Пожалуйста, отправляйте только текстовые сообщения.")
-
+        await message.answer("Я не могу это понять, мне нужен текст")
 ```
 
 ![alt text](photo/4.png)
